@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #divInicial {
+            display: block;
+        }
+
+        #divReceberNomes {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="divInicial">
+        <p>Nº cavalos: </p><input id="iptNumCavalos" type="number">
+        <p> Nº de voltas: </p> <input id="iptNumVoltas" type="number">
+        <br>
+        <br>
+        <button onclick="cadastrarCavalo()">Seguinte</button>
+    </div>
+    <div id="divReceberNomes">
+        <input id="iptNomeCavalo" type="text">
+        <button id="btnCadastrarCavalo" onclick="cadastrarCavalo()">Cadastrar Cavalo</button>
+        <button id="btnCorrida" onclick="corrida()">Começar corrida</button>
+    </div>
+    <div id="corrida">
+
+    </div>
+    <div id="texto"></div>
+</body>
+
+</html>
+
+<script>
+
+    var numCavalos = 0;
+    var numVoltas = 0;
+    var cavalos = [];
+    var primeiroLugarVolta = Infinity;
+    var segundoLugarVolta = Infinity;
+    var terceiroLugarVolta = Infinity;
+
+
+    function cadastrarCavalo() {
+        numVoltas = Number(iptNumVoltas.value)
+        numCavalos = Number(iptNumCavalos.value);
+        divInicial.style.display = "none";
+        divReceberNomes.style.display = "block";
+        btnCorrida.style.display = "none";
+        if (cavalos.lenght < numCavalos || cavalos.lenght == undefined) {
+
+            if (iptNomeCavalo.value != "") {
+                var nomeCavalo = iptNomeCavalo.value;
+                cavalos.push({ nome: nomeCavalo, tempo: [], tempoTotal: 0 });
+                iptNomeCavalo.value = '';
+                console.log(cavalos);
+
+                if (cavalos.length == numCavalos) {
+                    btnCadastrarCavalo.style.display = "none";
+                    btnCorrida.style.display = "block";
+                    iptNomeCavalo.style.display = "none";
+                }
+            }
+
+        }
+    }
+
+    function corrida() {
+        divReceberNomes.style.display = "none";
+        // var tempo = [];
+
+        texto.innerHTML = '';
+
+        for (i = 0; i < numVoltas; i++) {
+            console.log('a')
+            texto.innerHTML += `Volta ${i + 1}<br>`
+            // var teste = setTimeout()=>{console.log("parei"),5000};
+
+            for (n = 0; n < cavalos.length; n++) {
+                var rndNumero = (Math.random() * 2 + 7);
+                cavalos[n].tempo.push(rndNumero);
+
+                cavalos[n].tempoTotal += cavalos[n].tempo[i];
+
+                texto.innerHTML += `${cavalos[n].nome} - ${rndNumero.toFixed(2)} - ${cavalos[n].tempoTotal.toFixed(2)}<br>`
+            }
+
+            // for (let p = 0; p < cavalos.length; p++) {
+            //     if (Number(cavalos[p].tempoTotal) <= primeiroLugarVolta) {
+            //         console.log("primeiroLugarVolta")
+            //         primeiroLugarVolta = cavalos[p];
+            //     }
+            // }
+
+            // for (let p = 0; p < cavalos.length; p++) {
+            //     if (Number(cavalos[p].tempoTotal) > primeiroLugarVolta.tempoTotal && Number(cavalos[p].tempoTotal) < segundoLugarVolta) {
+            //         segundoLugarVolta = cavalos[p];
+
+            //     }
+
+            // }
+
+            // for (let p = 0; p < cavalos.length; p++) {
+            //     if (Number(cavalos[p].tempoTotal) > segundoLugarVolta.tempoTotal && Number(cavalos[p].tempoTotal) < terceiroLugarVolta) {
+            //         terceiroLugarVolta = cavalos[p];
+
+            //     }
+
+            // }
+
+            cavalos.sort()
+
+            texto.innerHTML
+        }
+    }
+</script>
