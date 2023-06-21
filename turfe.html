@@ -19,8 +19,8 @@
 
 <body>
     <div id="divInicial">
-        <p>Nº cavalos: </p><input id="iptNumCavalos" type="number">
-        <p> Nº de voltas: </p> <input id="iptNumVoltas" type="number">
+        <p>Número de cavalos: </p><input id="iptNumCavalos" type="number">
+        <p> Número de voltas: </p> <input id="iptNumVoltas" type="number">
         <br>
         <br>
         <button onclick="cadastrarCavalo()">Seguinte</button>
@@ -43,9 +43,6 @@
     var numCavalos = 0;
     var numVoltas = 0;
     var cavalos = [];
-    var primeiroLugarVolta = Infinity;
-    var segundoLugarVolta = Infinity;
-    var terceiroLugarVolta = Infinity;
 
 
     function cadastrarCavalo() {
@@ -54,13 +51,13 @@
         divInicial.style.display = "none";
         divReceberNomes.style.display = "block";
         btnCorrida.style.display = "none";
+
         if (cavalos.lenght < numCavalos || cavalos.lenght == undefined) {
 
             if (iptNomeCavalo.value != "") {
                 var nomeCavalo = iptNomeCavalo.value;
-                cavalos.push({ nome: nomeCavalo, tempo: [], tempoTotal: 0 });
+                cavalos.push({ nome: nomeCavalo, tempo: [], tempoTotal: [] });
                 iptNomeCavalo.value = '';
-                console.log(cavalos);
 
                 if (cavalos.length == numCavalos) {
                     btnCadastrarCavalo.style.display = "none";
@@ -78,46 +75,39 @@
 
         texto.innerHTML = '';
 
-        for (i = 0; i < numVoltas; i++) {
-            console.log('a')
-            texto.innerHTML += `Volta ${i + 1}<br>`
-            // var teste = setTimeout()=>{console.log("parei"),5000};
+        for (let v = 0; v < numVoltas; v++) {
+            texto.innerHTML += `Volta ${v + 1}<br>`
 
-            for (n = 0; n < cavalos.length; n++) {
+            
+            // Sorteio dos tempos da volta de cada cavalo registrado
+            for (let c = 0; c < cavalos.length; c++) {
                 var rndNumero = (Math.random() * 2 + 7);
-                cavalos[n].tempo.push(rndNumero);
+                cavalos[c].tempo.push(rndNumero);
 
-                cavalos[n].tempoTotal += cavalos[n].tempo[i];
-
-                texto.innerHTML += `${cavalos[n].nome} - ${rndNumero.toFixed(2)} - ${cavalos[n].tempoTotal.toFixed(2)}<br>`
+                if (v == 0){
+                    cavalos[c].tempoTotal.push(rndNumero);
+                } else {
+                    cavalos[c].tempoTotal.push((cavalos[c].tempoTotal[v-1])+rndNumero);
+                }
+                // cavalos[c].tempoTotal += cavalos[c].tempo[v];
             }
 
-            // for (let p = 0; p < cavalos.length; p++) {
-            //     if (Number(cavalos[p].tempoTotal) <= primeiroLugarVolta) {
-            //         console.log("primeiroLugarVolta")
-            //         primeiroLugarVolta = cavalos[p];
-            //     }
-            // }
+            // Organização do vetor cavalo para que fique sempre na ordem de posições da corrida
+            cavalos.sort(function (a, b) {
+                if (a.tempoTotal[v] < b.tempoTotal[v]) {
+                    return -1;
+                } else {
+                    return true;
+                }
+            });
+            console.log(cavalos);
 
-            // for (let p = 0; p < cavalos.length; p++) {
-            //     if (Number(cavalos[p].tempoTotal) > primeiroLugarVolta.tempoTotal && Number(cavalos[p].tempoTotal) < segundoLugarVolta) {
-            //         segundoLugarVolta = cavalos[p];
+            //Estrutura de repetição para mostrar os cavalos em suas respectivas funções
+            for (let c = 0; c < cavalos.length; c++) {
+                texto.innerHTML += `${c+1}° Lugar - ${cavalos[c].nome} - Tempo da volta:${cavalos[c].tempo[v].toFixed(2)} - Tempo total:${cavalos[c].tempoTotal[v].toFixed(2)}<br>`
+            }
 
-            //     }
 
-            // }
-
-            // for (let p = 0; p < cavalos.length; p++) {
-            //     if (Number(cavalos[p].tempoTotal) > segundoLugarVolta.tempoTotal && Number(cavalos[p].tempoTotal) < terceiroLugarVolta) {
-            //         terceiroLugarVolta = cavalos[p];
-
-            //     }
-
-            // }
-
-            cavalos.sort()
-
-            texto.innerHTML
         }
     }
 </script>
