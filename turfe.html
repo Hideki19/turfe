@@ -176,13 +176,16 @@
             width: 600px;
             height: 350px;
             right: 5%;
-            align-self: center;
+        
             padding: 10px;
             overflow-y: scroll;
             font-weight: bold;
 
 
 
+        }
+        #divPodio *{
+text-align: left;
         }
 
         #divPodio h4 {
@@ -218,8 +221,8 @@
             left: 5%;
             align-self: center;
             background-color: aqua;
-            width: 400px;
-            height: 300px;
+            width: 40vw;
+            height: 50vh;
         }
 
         .txtDestaque {
@@ -227,7 +230,10 @@
             text-shadow: -1px 1px black;
             text-align: left;
         }
-
+#divVoltas{
+    height: 60%;
+    overflow-y: visible;
+}
         @keyframes aparecer {
             0% {
                 opacity: 0;
@@ -271,7 +277,7 @@
         <div id="corrida">
 
         </div>
-        <div style="height: 650px;" class="inicial-class" id="divVoltas">
+        <div style="height: 70%;" class="inicial-class" id="divVoltas">
             <div id="texto">
             </div>
             <button style="margin-top: 10px;" id="btnProximaVolta" onclick="verVoltas(1)">Próxima Volta</button>
@@ -285,9 +291,10 @@
         </div>
         <div id="podioFora">
 
-            <h4>Primeiro Lugar <span id="spanPrimeiroLugar"></span></h4>
-            <h4>Segundo Lugar <span id="spanSegundoLugar"></span></h4>
-            <h4>Terceiro Lugar <span id="spanTerceiroLugar"></span></h4>
+        <span id="spanPrimeiroLugar"><img src="" alt=""></span> 
+        <span id="spanSegundoLugar"></span> 
+        <span id="spanTerceiroLugar"></span> 
+
         </div>
 
     </main>
@@ -452,7 +459,7 @@
             for (let c = 0; c < cavalos.length; c++) {
 
                 if (primeiroLugar == cavalos[c].nome) {
-                    historico.innerHTML += `<b class="txtDestaque">${v + 1}° Volta - ${cavalos[c].nome} - Tempo da volta:${cavalos[c].tempo[v].toFixed(2)} - Tempo total:${cavalos[c].tempoTotal[v].toFixed(2)}</b><br>`
+                    historico.innerHTML += `<span class="txtDestaque">${v + 1}° Volta - ${cavalos[c].nome} - Tempo da volta:${cavalos[c].tempo[v].toFixed(2)} - Tempo total:${cavalos[c].tempoTotal[v].toFixed(2)}</span><br>`
                 } else {
                     historico.innerHTML += `${v + 1}° Volta - ${cavalos[c].nome} - Tempo da volta:${cavalos[c].tempo[v].toFixed(2)} - Tempo total:${cavalos[c].tempoTotal[v].toFixed(2)}<br>`
                 }
