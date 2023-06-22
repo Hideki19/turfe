@@ -217,10 +217,14 @@ text-align: left;
         }
 
         #podioFora {
+            background-image: url(background.png);
+            background-size:80%;
+            background-position: bottom;
+            background-repeat: no-repeat;
             position: absolute;
             left: 5%;
             align-self: center;
-            background-color: aqua;
+border-radius: 20px;
             width: 40vw;
             height: 50vh;
         }
@@ -233,6 +237,33 @@ text-align: left;
 #divVoltas{
     height: 60%;
     overflow-y: visible;
+}
+#spanPrimeiroLugar{
+    position: absolute;
+    width: 200px;
+    height: 100px;
+    top: 3%;
+    left: 34.3%;
+text-align:center;
+    
+}
+#spanSegundoLugar{
+    position: absolute;
+    width: 200px;
+    height: 100px;
+    bottom: 50%;
+    left: 13.5%;
+    text-align: center;
+    
+}
+#spanTerceiroLugar{
+    position: absolute;
+    width: 200px;
+    height: 100px;
+    bottom: 10%;
+    right: 0;
+    text-align: center;
+    
 }
         @keyframes aparecer {
             0% {
@@ -291,9 +322,9 @@ text-align: left;
         </div>
         <div id="podioFora">
 
-        <span id="spanPrimeiroLugar"><img src="" alt=""></span> 
-        <span id="spanSegundoLugar"></span> 
-        <span id="spanTerceiroLugar"></span> 
+     <span id="spanPrimeiroLugar">Primeiro Lugar<br><img width="100px" height="100px" src="CAVALO1.jpg" alt=""><br></span>  
+        <span id="spanSegundoLugar">Segundo Lugar<br><img width="100px" height="100px" src="CAVALO2.jpg" alt=""><br></span> 
+        <span id="spanTerceiroLugar">Terceiro Lugar<br><img  width="100px" height="100px" src="CAVALO3.jpg" alt=""><br></span> 
 
         </div>
 
@@ -433,16 +464,16 @@ text-align: left;
         if (cavalos.length == 2) {
             primeiroLugar = cavalos[0].nome;
             segundoLugar = cavalos[1].nome;
-            spanPrimeiroLugar.innerHTML = ` <b>${primeiroLugar}&nbsp </b>`;
-            spanSegundoLugar.innerHTML = `  <b>${segundoLugar}&nbsp  </b>`;
+            spanPrimeiroLugar.innerHTML += ` <b>${primeiroLugar}&nbsp </b>`;
+            spanSegundoLugar.innerHTML += `  <b>${segundoLugar}&nbsp  </b>`;
         } else {
             primeiroLugar = cavalos[0].nome;
             segundoLugar = cavalos[1].nome;
             terceiroLugar = cavalos[2].nome;
 
-            spanPrimeiroLugar.innerHTML = `${primeiroLugar}&nbsp <br>`;
-            spanSegundoLugar.innerHTML = `${segundoLugar}&nbsp  <br>`;
-            spanTerceiroLugar.innerHTML = `${terceiroLugar}&nbsp<br>`;
+            spanPrimeiroLugar.innerHTML += `${primeiroLugar}&nbsp <br>`;
+            spanSegundoLugar.innerHTML += `${segundoLugar}&nbsp  <br>`;
+            spanTerceiroLugar.innerHTML += `${terceiroLugar}&nbsp<br>`;
         }
 
         for (let v = 0; v < numVoltas; v++) {
