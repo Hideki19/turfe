@@ -7,16 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Turfa</title>
     <style>
-        html,*{
-            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        html,
+        * {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         }
-        body{
+
+        body {
             background-image: url(walp1.jpg);
             background-size: cover;
             overflow: hidden;
             background-repeat: no-repeat;
             margin: 0;
         }
+
         main {
             width: 100vw;
             height: 100vh;
@@ -33,7 +36,8 @@
         #divVoltas,
         #divPodio,
         #btnVerPodio,
-        #divCavalosCadastrados {
+        #divCavalosCadastrados,
+        #podioFora {
             display: none;
         }
 
@@ -46,14 +50,15 @@
             height: 50vh;
             background-color: rgba(226, 164, 114, 0.4);
             padding: 50px;
-         border-radius: 20px;
-         border: solid 1px burlywood;
+            border-radius: 20px;
+            border: solid 1px burlywood;
         }
+
         .inicial-class p {
             font-size: 35px;
             color: aliceblue;
             text-shadow: 2px 2px #190396;
-            margin:0px;
+            margin: 0px;
         }
 
         .inicial-class input {
@@ -62,21 +67,23 @@
             font-size: 20px;
             border-radius: 20px;
             border: solid brown;
-       
+
             text-align: center;
             outline: none;
         }
+
         .inicial-class button {
             color: aliceblue;
             font-weight: bold;
             font-size: 25px;
             background-color: rgba(109, 52, 35, 0.919);
-            width:200px;
+            width: 200px;
             height: 50px;
             border-radius: 20px;
             text-align: center;
-           border: solid 2px burlywood;;
-           outline: none;
+            border: solid 2px burlywood;
+            ;
+            outline: none;
         }
 
         input[type=number]::-webkit-inner-spin-button {
@@ -89,18 +96,21 @@
             appearance: textfield;
 
         }
-        #btnCadastrarCavalo{
-            width: 250px;
-        }
-        #iptNomeCavalo{
-            width: 250px;
-        }
-        #btnCorrida{
+
+        #btnCadastrarCavalo {
             width: 250px;
         }
 
-        
-        #aviso{
+        #iptNomeCavalo {
+            width: 250px;
+        }
+
+        #btnCorrida {
+            width: 250px;
+        }
+
+
+        #aviso {
             width: 200px;
             height: 100px;
             position: absolute;
@@ -108,64 +118,134 @@
             top: 0;
             background-color: burlywood;
             font-size: 25px;
-         border-radius: 20px;
-         margin: 5px;
-         padding: 5px;
-            animation:aparecer 1s ease-in;
+            border-radius: 20px;
+            margin: 5px;
+            padding: 5px;
+            animation: aparecer 1s ease-in;
         }
-td,tr{
-    border:solid 2px white;    
-    background-color: antiquewhite;
-    color: black;
-    font-size: 30px;
-    width: 280px;
-    text-align: center;
-}
-h3{
-    font-size: 40px;
+
+        td,
+        tr {
+            border: solid 2px white;
+            background-color: antiquewhite;
+            color: black;
+            font-size: 30px;
+            width: 280px;
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 40px;
             color: aliceblue;
             text-shadow: 2px 2px #190396;
-            margin:0px;
-}
-table{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.texto-class{
-    color: aliceblue;
-    font-size: 25px;
-    margin: 0px;
-    text-shadow: none;
-    padding: 20px;
+            margin: 0px;
+        }
 
-}
-#divVoltas h1{
-    color: burlywood;
-    padding: 20px;
-}
-#texto{
-    background-color: rgba(0, 0, 0, 0.8);
-    width: 100%;
-    height: 100%;
-}
+        table {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .texto-class {
+            color: aliceblue;
+            font-size: 25px;
+            margin: 0px;
+            text-shadow: none;
+            padding: 20px;
+            text-shadow: -1px 3px black;
+        }
+
+        #divVoltas h1 {
+            color: burlywood;
+            padding: 20px;
+        }
+
+        #texto {
+            /* background-color: rgba(0, 0, 0, 0.8); */
+            border-radius: 20px;
+            width: 100%;
+            height: 100%;
+            text-shadow: -1px 4px black;
+        }
+
+        #divPodio {
+            position: absolute;
+            background-color: burlywood;
+            color: aliceblue;
+            width: 600px;
+            height: 350px;
+            right: 5%;
+            align-self: center;
+            padding: 10px;
+            overflow-y: scroll;
+            font-weight: bold;
+
+
+
+        }
+
+        #divPodio h4 {
+            font-size: 30px;
+            color: azure;
+            margin: 0px;
+
+        }
+
+        #historico {
+            font-size: 18px;
+            margin: 0px;
+            padding: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: column;
+            text-align: left;
+
+
+
+        }
+
+        #historico h1 {
+            text-align: center;
+            color: white;
+
+            text-shadow: 2px 2px black;
+        }
+
+        #podioFora {
+            position: absolute;
+            left: 5%;
+            align-self: center;
+            background-color: aqua;
+            width: 400px;
+            height: 300px;
+        }
+
+        .txtDestaque {
+            color: #ffff00;
+            text-shadow: -1px 1px black;
+            text-align: left;
+        }
+
         @keyframes aparecer {
-  0% {
-    opacity: 0;
-    transform: translateY(50px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 
 <body>
-<div id="aviso">
+    <div id="aviso">
 
-</div>
+    </div>
     <main>
         <div class="inicial-class" id="divInicial">
             <p>Número de cavalos: </p><input placeholder="Entre 2 e 6" id="iptNumCavalos" type="number">
@@ -174,17 +254,17 @@ table{
             <br>
             <button onclick="validarCavalosVoltas()">Seguinte</button>
         </div>
-        <div  class="inicial-class" id="divReceberNomes">
+        <div class="inicial-class" id="divReceberNomes">
             <p id="sumirDigiteNome">Digite o nome do cavalo</p>
             <input id="iptNomeCavalo" type="text">
             <button id="btnCadastrarCavalo" onclick="cadastrarCavalo()">Cadastrar Cavalo</button>
             <div id="divCavalosCadastrados">
-    
+
                 <h3>Cavalos Cadastrados</h3>
                 <table id="retornoCavalosCadastrados">
-                
-                    </table>
-        
+
+                </table>
+
             </div>
             <button id="btnCorrida" onclick="corrida()">Começar corrida</button>
         </div>
@@ -198,12 +278,18 @@ table{
             <button id="btnVerPodio" onclick="podio()">Ver Pódio</button>
         </div>
         <div class="inicial-class" id="divPodio">
+
+            <div id="historico">
+                <h1>Histórico de Corrida!!!</h1>
+            </div>
+        </div>
+        <div id="podioFora">
+
             <h4>Primeiro Lugar <span id="spanPrimeiroLugar"></span></h4>
             <h4>Segundo Lugar <span id="spanSegundoLugar"></span></h4>
             <h4>Terceiro Lugar <span id="spanTerceiroLugar"></span></h4>
-
-            <div id="historico"></div>
         </div>
+
     </main>
 </body>
 
@@ -217,7 +303,7 @@ table{
     var primeiroLugar = "";
     var segundoLugar = "";
     var terceiroLugar = "";
-aviso.style.display = 'none'
+    aviso.style.display = 'none'
     function validarCavalosVoltas() {
         numVoltas = Number(iptNumVoltas.value);
         numCavalos = Number(iptNumCavalos.value);
@@ -242,7 +328,7 @@ aviso.style.display = 'none'
     }
 
     function cadastrarCavalo() {
-       
+
         chamarAviso(iptNomeCavalo.value)
         divInicial.style.display = "none";
         divReceberNomes.style.display = "flex";
@@ -318,26 +404,34 @@ aviso.style.display = 'none'
 
         //Lista as informações da volta de cada cavalo registrado
         for (let c = 0; c < cavalos.length; c++) {
-            texto.innerHTML += `<h3 class="texto-class">${c + 1}° Lugar - ${cavalos[c].nome} - Tempo da volta:${cavalos[c].tempo[voltaAtual].toFixed(2)} - Tempo total:${cavalos[c].tempoTotal[voltaAtual].toFixed(2)}</h3>`
+            texto.innerHTML += `<h3 class="texto-class">${c + 1}° Lugar - ${cavalos[c].nome} - Tempo da volta:${cavalos[c].tempo[voltaAtual].toFixed(2)} - Tempo total:${cavalos[c].tempoTotal[voltaAtual].toFixed(2)}</h3> `
         }
 
         if (voltaAtual + 1 == numVoltas) {
-            btnVerPodio.style.display = "flex";
+            btnVerPodio.style.display = "block";
             btnProximaVolta.style.display = "none";
         }
     }
 
     function podio() {
         divVoltas.style.display = "none";
-        divPodio.style.display = "flex";
+        divPodio.style.display = "block";
+        podioFora.style.display = "block"
 
-        primeiroLugar = cavalos[0].nome;
-        segundoLugar = cavalos[1].nome;
-        terceiroLugar = cavalos[2].nome;
+        if (cavalos.length == 2) {
+            primeiroLugar = cavalos[0].nome;
+            segundoLugar = cavalos[1].nome;
+            spanPrimeiroLugar.innerHTML = ` <b>${primeiroLugar}&nbsp </b>`;
+            spanSegundoLugar.innerHTML = `  <b>${segundoLugar}&nbsp  </b>`;
+        } else {
+            primeiroLugar = cavalos[0].nome;
+            segundoLugar = cavalos[1].nome;
+            terceiroLugar = cavalos[2].nome;
 
-        spanPrimeiroLugar.innerHTML = ` ${primeiroLugar}&nbsp`;
-        spanSegundoLugar.innerHTML = ` ${segundoLugar}&nbsp `;
-        spanTerceiroLugar.innerHTML = ` ${terceiroLugar}&nbsp`;
+            spanPrimeiroLugar.innerHTML = `${primeiroLugar}&nbsp <br>`;
+            spanSegundoLugar.innerHTML = `${segundoLugar}&nbsp  <br>`;
+            spanTerceiroLugar.innerHTML = `${terceiroLugar}&nbsp<br>`;
+        }
 
         for (let v = 0; v < numVoltas; v++) {
 
@@ -353,20 +447,20 @@ aviso.style.display = 'none'
             for (let c = 0; c < cavalos.length; c++) {
 
                 if (primeiroLugar == cavalos[c].nome) {
-                    historico.innerHTML += `<b>${v + 1}° Volta - ${cavalos[c].nome} - Tempo da volta:${cavalos[c].tempo[v].toFixed(2)} - Tempo total:${cavalos[c].tempoTotal[v].toFixed(2)}</b><br>`
+                    historico.innerHTML += `<b class="txtDestaque">${v + 1}° Volta - ${cavalos[c].nome} - Tempo da volta:${cavalos[c].tempo[v].toFixed(2)} - Tempo total:${cavalos[c].tempoTotal[v].toFixed(2)}</b><br>`
                 } else {
                     historico.innerHTML += `${v + 1}° Volta - ${cavalos[c].nome} - Tempo da volta:${cavalos[c].tempo[v].toFixed(2)} - Tempo total:${cavalos[c].tempoTotal[v].toFixed(2)}<br>`
                 }
             }
         }
     }
-function chamarAviso(nome){
-    if (nome != "") {
-        aviso.style.display = "block"
-        aviso.innerHTML = `O cavalo <b>${nome}</b> foi cadastrado!`
-      var avisar = setTimeout(() => {
-      aviso.style.display = 'none';
-    }, 2000);
+    function chamarAviso(nome) {
+        if (nome != "") {
+            aviso.style.display = "block"
+            aviso.innerHTML = `O cavalo <b>${nome}</b> foi cadastrado!`
+            var avisar = setTimeout(() => {
+                aviso.style.display = 'none';
+            }, 2000);
+        }
     }
-}
 </script>
