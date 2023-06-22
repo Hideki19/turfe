@@ -8,10 +8,14 @@
     <title>Document</title>
     <style>
         #divInicial {
-            display: block;
+            display: flex;
         }
 
-        #divReceberNomes {
+        #divReceberNomes,
+        #divVoltas,
+        #divPodio,
+        #btnVerPodio,
+        #divCavalosCadastrados {
             display: none;
         }
     </style>
@@ -23,17 +27,33 @@
         <p> Número de voltas: </p> <input id="iptNumVoltas" type="number">
         <br>
         <br>
-        <button onclick="cadastrarCavalo()">Seguinte</button>
+        <button onclick="validarCavalosVoltas()">Seguinte</button>
     </div>
     <div id="divReceberNomes">
         <input id="iptNomeCavalo" type="text">
         <button id="btnCadastrarCavalo" onclick="cadastrarCavalo()">Cadastrar Cavalo</button>
+        <div id="divCavalosCadastrados">
+            <h3>Cavalos Cadastrados</h3>
+            <div id="retornoCavalosCadastrados"></div>
+        </div>
         <button id="btnCorrida" onclick="corrida()">Começar corrida</button>
     </div>
     <div id="corrida">
 
     </div>
-    <div id="texto"></div>
+    <div id="divVoltas">
+        <div id="texto">
+        </div>
+        <button id="btnProximaVolta" onclick="verVoltas(1)">Próxima Volta</button>
+        <button id="btnVerPodio" onclick="podio()">Ver Pódio</button>
+    </div>
+    <div id="divPodio">
+        <h4>Primeiro Lugar <span id="spanPrimeiroLugar"></span></h4>
+        <h4>Segundo Lugar <span id="spanSegundoLugar"></span></h4>
+        <h4>Terceiro Lugar <span id="spanTerceiroLugar"></span></h4>
+
+        <div id="historico"></div>
+    </div>
 </body>
 
 </html>
@@ -43,13 +63,37 @@
     var numCavalos = 0;
     var numVoltas = 0;
     var cavalos = [];
+    var primeiroLugar = "";
+    var segundoLugar = "";
+    var terceiroLugar = "";
 
+    function validarCavalosVoltas() {
+        numVoltas = Number(iptNumVoltas.value);
+        numCavalos = Number(iptNumCavalos.value);
+        let erro = false;
+
+        if (numVoltas < 1 || numVoltas > 10) {
+            alert("O número de voltas deve estar entre 1 e 10!")
+            iptNumVoltas.value = "";
+            iptNumCavalos.value = "";
+            erro = true;
+        }
+
+        if (numCavalos < 2 || numCavalos > 6) {
+            alert("O número de cavalos deve estar entre 2 e 6!")
+            iptNumVoltas.value = "";
+            iptNumCavalos.value = "";
+            erro = true;
+        }
+        if (erro == false) {
+            cadastrarCavalo()
+        }
+    }
 
     function cadastrarCavalo() {
-        numVoltas = Number(iptNumVoltas.value)
-        numCavalos = Number(iptNumCavalos.value);
+
         divInicial.style.display = "none";
-        divReceberNomes.style.display = "block";
+        divReceberNomes.style.display = "flex";
         btnCorrida.style.display = "none";
 
         if (cavalos.lenght < numCavalos || cavalos.lenght == undefined) {
@@ -57,42 +101,94 @@
             if (iptNomeCavalo.value != "") {
                 var nomeCavalo = iptNomeCavalo.value;
                 cavalos.push({ nome: nomeCavalo, tempo: [], tempoTotal: [] });
-                iptNomeCavalo.value = '';
+                iptNomeCavalo.value = "";
 
                 if (cavalos.length == numCavalos) {
                     btnCadastrarCavalo.style.display = "none";
-                    btnCorrida.style.display = "block";
+                    btnCorrida.style.display = "flex";
                     iptNomeCavalo.style.display = "none";
+                    divCavalosCadastrados.style.display= "flex";
+
+                    for (let i = 0; i < numCavalos; i++){
+                        retornoCavalosCadastrados.innerHTML += `<p>${cavalos[i].nome}</p>`;
+                    }
                 }
             }
 
         }
     }
 
+    //Essa função sorteia todos os tempos de todas as voltas e armazena em um json
     function corrida() {
         divReceberNomes.style.display = "none";
-        // var tempo = [];
-
-        texto.innerHTML = '';
 
         for (let v = 0; v < numVoltas; v++) {
             texto.innerHTML += `Volta ${v + 1}<br>`
 
-            
+
             // Sorteio dos tempos da volta de cada cavalo registrado
             for (let c = 0; c < cavalos.length; c++) {
                 var rndNumero = (Math.random() * 2 + 7);
                 cavalos[c].tempo.push(rndNumero);
 
-                if (v == 0){
+                if (v == 0) {
                     cavalos[c].tempoTotal.push(rndNumero);
                 } else {
-                    cavalos[c].tempoTotal.push((cavalos[c].tempoTotal[v-1])+rndNumero);
+                    cavalos[c].tempoTotal.push((cavalos[c].tempoTotal[v - 1]) + rndNumero);
                 }
-                // cavalos[c].tempoTotal += cavalos[c].tempo[v];
             }
 
-            // Organização do vetor cavalo para que fique sempre na ordem de posições da corrida
+
+            console.log(cavalos);
+        }
+
+        verVoltas(0)
+
+    }
+
+    var voltaAtual = 0;
+
+    function verVoltas(volta) {
+        divVoltas.style.display = "flex";
+        voltaAtual += volta;
+        texto.innerHTML = '';
+        // Organização do vetor cavalo para que fique sempre na ordem de posições da corrida
+        cavalos.sort(function (a, b) {
+            if (a.tempoTotal[voltaAtual] < b.tempoTotal[voltaAtual]) {
+                return -1;
+            } else {
+                return true;
+            }
+        });
+
+        texto.innerHTML += `Volta ${voltaAtual + 1}<br>`
+
+        //Lista as informações da volta de cada cavalo registrado
+        for (let c = 0; c < cavalos.length; c++) {
+            texto.innerHTML += `${c + 1}° Lugar - ${cavalos[c].nome} - Tempo da volta:${cavalos[c].tempo[voltaAtual].toFixed(2)} - Tempo total:${cavalos[c].tempoTotal[voltaAtual].toFixed(2)}<br>`
+        }
+
+        if (voltaAtual + 1 == numVoltas) {
+            btnVerPodio.style.display = "flex";
+            btnProximaVolta.style.display = "none";
+        }
+    }
+
+    function podio() {
+        divVoltas.style.display = "none";
+        divPodio.style.display = "flex";
+
+        primeiroLugar = cavalos[0].nome;
+        segundoLugar = cavalos[1].nome;
+        terceiroLugar = cavalos[2].nome;
+
+        spanPrimeiroLugar.innerHTML = primeiroLugar;
+        spanSegundoLugar.innerHTML = segundoLugar;
+        spanTerceiroLugar.innerHTML = terceiroLugar;
+
+        for (let v = 0; v < numVoltas ; v++) {
+
+            //Organização dos colocados no vetor a cada volta novamente;
             cavalos.sort(function (a, b) {
                 if (a.tempoTotal[v] < b.tempoTotal[v]) {
                     return -1;
@@ -100,14 +196,16 @@
                     return true;
                 }
             });
-            console.log(cavalos);
 
-            //Estrutura de repetição para mostrar os cavalos em suas respectivas funções
             for (let c = 0; c < cavalos.length; c++) {
-                texto.innerHTML += `${c+1}° Lugar - ${cavalos[c].nome} - Tempo da volta:${cavalos[c].tempo[v].toFixed(2)} - Tempo total:${cavalos[c].tempoTotal[v].toFixed(2)}<br>`
+
+                if (primeiroLugar == cavalos[c].nome) {
+                    historico.innerHTML += `<b>${v + 1}° Volta - ${cavalos[c].nome} - Tempo da volta:${cavalos[c].tempo[v].toFixed(2)} - Tempo total:${cavalos[c].tempoTotal[v].toFixed(2)}</b><br>`
+                } else {
+                    historico.innerHTML += `${v + 1}° Volta - ${cavalos[c].nome} - Tempo da volta:${cavalos[c].tempo[v].toFixed(2)} - Tempo total:${cavalos[c].tempoTotal[v].toFixed(2)}<br>`
+                }
             }
-
-
         }
     }
+
 </script>
